@@ -48,14 +48,18 @@ function takeCommand(message) {
     if (message.includes('hey') || message.includes('hello') || message.includes('hi')) {
         speak("Hello Sir, How May I Help You?");
     } else if(message.includes('tell me about you') || message.includes('who are you')){
-        speak("I'm a Voice Assistant created for a college project");
-    } else if(message.includes('what is your name')){
+        speak("I'm a Voice Assistant created for a college project by Deepak");
+    } else if(message.includes('impressive')){
+        speak("Thank you boss");
+    } else if(message.includes('who is the best criketer')){
+        speak("mahendra singh dhoni is the best player");
+    }else if(message.includes('what is your name')){
         speak("I don't have any name, But you can call me yours");
     } else if (message.includes("open google")) {
         window.open("https://google.com", "_blank");
         speak("Opening Google...");
     } else if(message.includes('what i am doing')){
-        speak("you are using Snapchat");
+        speak("Talking with me");
     } else if (message.includes("open Youtube")) {
         window.open("https://youtube.com", "_blank");
         speak("Opening Youtube...");
