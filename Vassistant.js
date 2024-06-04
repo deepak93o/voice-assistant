@@ -25,7 +25,7 @@ function wishMe() {
 }
 
 window.addEventListener('load', () => {
-    speak("Initializing JARVIS...");
+    speak("Initializing Assistant...");
     wishMe();
 });
 
@@ -51,13 +51,20 @@ function takeCommand(message) {
         speak("I'm a Voice Assistant created for a college project by Deepak");
     } else if(message.includes('impressive')){
         speak("Thank you boss");
-    } else if(message.includes('who is the best criketer')){
+    } else if(message.includes('who is the best cricketer')){
         speak("mahendra singh dhoni is the best player");
-    }else if(message.includes('what is your name')){
+    } else if(message.includes('I love you')){
+        speak("Awww Thank youh");
+    }else if(message.includes('open my github account')){
+        window.open("https://github.com/deepak93o");
+        speak("Opening GitHub...");
+    } else if(message.includes('what is your name')){
         speak("I don't have any name, But you can call me yours");
     } else if (message.includes("open google")) {
         window.open("https://google.com", "_blank");
         speak("Opening Google...");
+    } else if(message.includes('2+2=5 how')){
+        speak("by mistake");
     } else if(message.includes('what i am doing')){
         speak("Talking with me");
     } else if (message.includes("open Youtube")) {
