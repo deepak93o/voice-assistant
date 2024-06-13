@@ -14,14 +14,22 @@ function speak(text) {
 function wishMe() {
     var day = new Date();
     var hour = day.getHours();
+    var greeting;
 
     if (hour >= 0 && hour < 12) {
-        speak("Good Morning Boss...");
+        greeting = "Good Morning";
     } else if (hour >= 12 && hour < 17) {
-        speak("Good Afternoon Master...");
+        greeting = "Good Afternoon";
     } else {
-        speak("Good Evening Sir...");
+        greeting = "Good Evening";
     }
+
+    return greeting;
+}
+
+function makeCall(contact) {
+    speak(`Making a call to ${contact}`);
+    window.open(`tel:${contact}`);
 }
 
 window.addEventListener('load', () => {
@@ -45,21 +53,24 @@ btn.addEventListener('click', () => {
 });
 
 function takeCommand(message) {
-    if (message.includes('hey') || message.includes('hello') || message.includes('hi')) {
+    if (message.includes('hey') || message.includes('hello') || message.includes('hi') || message.includes('hello sky') || message.includes('hey sky') || message.includes('hi sky')){
         speak("Hello Sir, How May I Help You?");
     } else if(message.includes('tell me about you') || message.includes('who are you')){
-        speak("I'm a Voice Assistant created for a college project by Deepak");
+        speak("I'm Sky. I am a Voice Assistant created by Deepak");
     } else if(message.includes('impressive')){
         speak("Thank you boss");
+    } else if (message.includes("good morning") || message.includes("good afternoon") || message.includes("good evening")) {
+        const greeting = wishMe();
+        speak(`${greeting}! How can I assist you today?`);
     } else if(message.includes('who is the best cricketer')){
-        speak("mahendra singh dhoni is the best player");
+        speak("Mahendra Singh Dhoni is the best player");
     } else if(message.includes('I love you')){
-        speak("Awww Thank youh");
-    }else if(message.includes('open my github account')){
+        speak("Awww Thank you");
+    } else if(message.includes('open my github account')){
         window.open("https://github.com/deepak93o");
         speak("Opening GitHub...");
     } else if(message.includes('what is your name')){
-        speak("I don't have any name, But you can call me yours");
+        speak("I don't have any name, but you can call me yours");
     } else if (message.includes("open google")) {
         window.open("https://google.com", "_blank");
         speak("Opening Google...");
@@ -89,10 +100,49 @@ function takeCommand(message) {
         const date = new Date().toLocaleString(undefined, { month: "short", day: "numeric" });
         const finalText = "Today's date is " + date;
         speak(finalText);
-    } else if (message.includes('calculator')) {
-        window.open('Calculator:///');
-        const finalText = "Opening Calculator";
-        speak(finalText);
+    }else if (message.includes("open calculator")) {
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+           
+            window.location.href = "calshow://"; 
+            speak("Opening Calculator.");
+        } else if (/Android/.test(navigator.userAgent)) {
+            
+            window.location.href = "intent://com.android.calculator2/#Intent;scheme=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;end";
+            speak("Opening Calculator.");
+        } else {
+            
+            window.open('Calculator:///', '_blank');
+            speak("Opening Calculator.");
+        }
+    } else if (message.includes('open whatsapp')) {
+            if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone/i)) {
+            window.open("whatsapp://send?text=Hello");
+            speak("Opening WhatsApp...");
+        } else {
+            window.open("https://web.whatsapp.com", "_blank");
+            speak("Opening WhatsApp Web...");
+        }
+    } else if (message.includes('open whatsapp')) {
+        if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone/i)) {
+            window.open("whatsapp://send?text=Hello");
+            speak("Opening WhatsApp...");
+        } else {
+            window.open("https://web.whatsapp.com", "_blank");
+            speak("Opening WhatsApp Web...");
+        }
+    } else if (message.includes("make a call to")) {
+        const contact = message.replace('make a call to', '').trim();
+        if (contact) {
+            makeCall(contact);
+        } else {
+            speak("Please provide a contact number.");
+        }
+    } else if (message.includes('send message to')) {
+        let details = message.replace('send message to', '').trim();
+        let [contact, ...msgParts] = details.split(' ');
+        let msg = msgParts.join(' ');
+        window.open(`sms:${contact}?body=${encodeURIComponent(msg)}`);
+        speak(`Sending message to ${contact}`);
     } else {
         window.open(`https://www.google.com/search?q=${message.replace(" ", "+")}`, "_blank");
         const finalText = "I found some information for " + message + " on Google";
