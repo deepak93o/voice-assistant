@@ -27,6 +27,16 @@ function wishMe() {
     return greeting;
 }
 
+function calculate(expression) {
+    try {
+        const sanitizedExpression = expression.replace(/[^-()\d/*+.]/g, '');
+        const result = eval(sanitizedExpression);
+        return result;
+    } catch (e) {
+        return "I couldn't calculate that. Please try again.";
+    }
+}
+
 function makeCall(contact) {
     speak(`Making a call to ${contact}`);
     window.open(`tel:${contact}`);
@@ -180,6 +190,14 @@ function takeCommand(message) {
         }, timerDuration);
 
         speak(`Setting a timer for ${timeString}.`);
+    } else if (message.includes('calculate')) {
+        let expression = message.replace('calculate', '').trim();
+        
+        expression = expression.replace(/times/g, '*');
+        
+        expression = expression.replace(/divided by/g, '/');
+        const result = calculate(expression);
+        speak(`The result is ${result}`);
     } else {
         window.open(`https://www.google.com/search?q=${message.replace(" ", "+")}`, "_blank");
         const finalText = "I found some information for " + message + " on Google";
