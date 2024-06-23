@@ -59,7 +59,7 @@ function takeCommand(message) {
         speak("I'm Sky. I am a Voice Assistant created by Deepak");
     } else if(message.includes('how are you')){
         speak("I'm Good what about you");
-    } else if(message.includes('i am good too')||message.includes('fine')){
+    } else if(message.includes('i am fine')||message.includes('fine')){
             speak("Good to hear. How may I help you");
     } else if(message.includes('impressive')|| message.includes('nice')){
         speak("Thank you boss");
