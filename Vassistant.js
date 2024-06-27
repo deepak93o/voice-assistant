@@ -193,7 +193,7 @@ function takeCommand(message) {
     } else if (message.includes('calculate')) {
         let expression = message.replace('calculate', '').trim();
         
-        expression = expression.replace(/into/g, '*');
+        expression = expression.replace(/into || multiply by/g, '*');
         expression = expression.replace(/square/g, '^');
         
         expression = expression.replace(/divided by/g, '/');
